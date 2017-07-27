@@ -1,5 +1,5 @@
 # coding=utf-8
-from flask import Flask, Response
+from flask import Flask, Response, render_template
 
 import readDATA
 
@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    return render_template('index.html')
 
 
 @app.route('/<apiname>/')
