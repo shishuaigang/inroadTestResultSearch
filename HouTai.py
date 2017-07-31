@@ -1,7 +1,8 @@
 # coding=utf-8
-from flask import Flask, Response, render_template
+import pymssql
+from flask import Flask, Response, render_template, request, redirect, jsonify
 
-import readDATA
+from Prepare import Prepare
 
 app = Flask(__name__)
 
@@ -11,17 +12,20 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/<apiname>/')
-def result(apiname):
-    fullurl = readDATA.readDATA("Inroad_Test_Result", "192.168.31.99\\sql2012", "sgshi", "ssg12345!", "").split_url()
-    spliturl = []
-    for i in range(len(fullurl)):
-        temp = fullurl[i].split('/')
-        spliturl.append(temp[2])
-    zidian = dict(zip(spliturl, fullurl))
+@app.route('/detail', methods=["POST", "get"])
+def detail():
+    data = Prepare("1", "1", "1").detail()
+    return jsonify(data)
 
-    readDATA.readDATA("Inroad_Test_Result", "192.168.31.99\\sql2012", "sgshi", "ssg12345!",
-                      zidian[apiname]).create_qushitu()
+
+@app.route('/search', methods=["POST"])
+def search():
+    bt = request.form.get('begintime')
+    et = request.form.get('endtime')
+    name = request.form.get('apiname')
+    p = Prepare(bt, et, name)
+    p.sql_sentence()
+    p.create_qushitu()
     with open('qushi.png', 'rb') as f:
         return Response(f.read(), mimetype='image/png')
 

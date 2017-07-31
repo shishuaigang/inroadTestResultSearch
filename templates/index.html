@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>趋势查询</title>
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="App Loction Form,Login Forms,Sign up Forms,Registration Forms,News latter Forms,Elements"./>
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
-<!--webfonts-->
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--//webfonts-->
+    <title>趋势查询</title>
+    <link href="../static/css/style.css" rel='stylesheet' type='text/css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="App Loction Form,Login Forms,Sign up Forms,Registration Forms,News latter Forms,Elements" ./>
+    <script>
+        $.ajax({
+                cache: true,
+                type: "POST",
+                url:"/search",
+                data:$('#searchform').serialize(),
+                async: false,
+                error: function(request) {
+                    alert("Connection error");
+                },
+                success: function(data) {
+                }
+            });
+    </script>
 </head>
 <body>
-	<h1></h1>
-		<div class="app-location">
-			<h2>Inroad API 趋势查询</h2>
-			--<div class="line"><span></span></div>
-			<div class="location"><img src="images/inroad.PNG" class="img-responsive" alt="" /></div>
-			<form>
-			<select name="">
-				<option value="0">请选择开始日期</option>
-				<option value="1">DIVCSS5</option>
-			</select>
-			<select name="">
-				<option value="0">请选择结束日期</option>
-				<option value="1">DIVCSS5</option>
-			</select>
-			<select name="">
-				<option value="0">请选择API</option>
-				<option value="1">DIVCSS5</option>
-			</select>
-				<!--<input type="text" value="请选择API id" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Password';}">-->
-				<div class="submit"><input type="submit" onClick="myFunction()" value="查询" ></div>
-				<div class="clear"></div>
-			</form>
-		</div>
-	<!--start-copyright-->
-   		<!--<div class="copy-right">
-				<p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-		</div>-->
-	<!--//end-copyright-->
+<h1></h1>
+<div class="app-location">
+    <h2>Inroad API 趋势查询</h2>
+    <div class="line"><span></span></div>
+    <div class="location"><img src="../static/images/inroad.PNG" class="img-responsive" alt=""/></div>
+    <form name="searchfrom" id="searchform" method="post" action="/search">
+            <input type="text" name="begintime" value="开始批次" onFocus="javascript:if(this.value=='开始批次')this.value='';" onBlur="if (this.value == '') {this.value = '开始批次';}">
+            <input type="text" name="endtime" value="结束批次" onFocus="javascript:if(this.value=='结束批次')this.value='';" onBlur="if (this.value == '') {this.value = '结束批次';}">
+            <input type="text" name="apiname" value="API名字" onFocus="javascript:if(this.value=='API名字')this.value='';" onBlur="if (this.value == '') {this.value = 'API名字';}">
+            <input type="submit" value="查询">
+    </form>
+</div>
 </body>
 </html>
