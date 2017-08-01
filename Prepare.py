@@ -60,17 +60,18 @@ class Prepare:
         testNo_list = [all_list[i][1] for i in range(len(all_list))]
         fig, ax = plt.subplots()
         # 设置显示图片的大小
-        plt.figure(figsize=(13.66, 8.5))
+        plt.figure(figsize=(12.8, 8))
         plt.title(self.apiname + '  response time')
         plt.ylabel('Response time  (ms)')
-        # 将x的刻度使用其他字符串来代替，x轴刻度45度弯曲
+        # 将x的刻度使用其他字符串来代替，x轴刻度30度弯曲
         x = [i for i in range(len(all_list))]
-        plt.xticks(x, testNo_list, rotation=45)
+        plt.xticks(x, testNo_list, rotation=30)
         # 绘图
         pl.plot(x, time_list)
         plt.grid(True)
         plt.savefig('qushi.png')
 
-
+'''
 if __name__ == '__main__':
     print Prepare('1', '1', '1').detail()["res"][0]
+'''
