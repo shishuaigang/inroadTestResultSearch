@@ -12,17 +12,17 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/detail', methods=["POST", "get"])
+@app.route('/detail', methods=["get"])
 def detail():
-    data = Prepare("1", "1", "1").detail()
-    return jsonify(data)
+    return render_template('detail.html')
 
 
-@app.route('/search', methods=["POST"])
+@app.route('/search', methods=["GET"])
 def search():
-    bt = request.form.get('begintime')
-    et = request.form.get('endtime')
-    name = request.form.get('apiname')
+    bt = request.args.get('begintime')
+    et = request.args.get('endtime')
+    # request.form.get('endtime') post获取参数的方式
+    name = request.args.get('apiname')  # get获取参数的方式
     p = Prepare(bt, et, name)
     p.sql_sentence()
     p.create_qushitu()
