@@ -1,7 +1,5 @@
 # coding=utf-8
-import pymssql
-from flask import Flask, Response, render_template, request, redirect, jsonify
-
+from flask import Flask, Response, render_template, request
 from Prepare import Prepare
 
 app = Flask(__name__)
